@@ -3,35 +3,37 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import axiosClient from "./axiosClient"
 import { useStateContext } from "../Contexts/ContextProvider";
+import { useState } from "react";
 
 function Signup(){
     const nameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordconfirmationRef = useRef();
+    const [errors, setErrors] = useState(null);
 
     const {setUser, getToken} = useStateContext()
+    
     function onSubmit(e){
         e.preventDefault()
+
         const payload = {
             name: nameRef.current.value,
             email: emailRef.current.value,
             password: passwordRef.current.value,
-            password_confirmation: passwordconfirmationRef.current.value
+            password_confirmation: passwordconfirmationRef.current.value,
         }
         axiosClient.post('/signup', payload)
             .then(({data}) => {
             setUser(data.user)
-            getToken(data.token)
+            getToken(data.token);
         })
         .catch(err => {
             const response = err.response;
             if(response && response.status === 422){
-                console.log(response.data.errors)
+                setErrors(response.data.errors)
             }
-        })
-
-        
+        }) 
     }
     return(
         <>
@@ -39,6 +41,13 @@ function Signup(){
             <div className="w-full max-w-sm p-6 bg-white rounded-2xl shadow-md">
                 <form onSubmit={onSubmit} className="space-y-4">
                 <h2 className="text-2xl font-bold text-center text-gray-700">Signup</h2>
+                {errors && 
+                    <div className="bg-red-500 rounded p-2">
+                        {Object.keys(errors).map(key => (
+                            <p className="text-white pl-5"  key={key}>{errors[key][0]}</p>
+                        ))}
+                    </div>
+                }
                 <input
                     type="text"
                     placeholder="Fullname"

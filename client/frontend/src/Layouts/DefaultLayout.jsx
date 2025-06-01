@@ -39,7 +39,7 @@ function DefaultLayout(){
                     </div>
 
                     <div className="text-gray-700 text-sm">
-                        User info
+                        {user.name}
                     </div>
                 </header>
 
