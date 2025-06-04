@@ -63,10 +63,11 @@ function DefaultLayout(){
 
                     <div className="text-gray-700 text-sm">
                         {user?.name || 'Loading...'}
+                        <button className="text-red-600 pl-5" onClick={handleLogout}>
+                            Logout
+                        </button>
                     </div>
-                    <button className="text-red-600" onClick={handleLogout}>
-                        Logout
-                    </button>
+                    
                 </header>
 
 
