@@ -11,7 +11,6 @@ function DefaultLayout(){
     useEffect(() => {
             axiosClient.get('/user')
             .then(({data}) => {
-                console.log(data)
                 setUser(data);      
             });
         }, []);

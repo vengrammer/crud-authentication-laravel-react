@@ -8,7 +8,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Http\Request;
 class Usercontroller extends Controller
 {
     /**
@@ -45,13 +45,14 @@ class Usercontroller extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
+       
         $data = $request->validated();
         if(isset($data['password'])){
             $data['password'] = Hash::make($data['password']);
         }
         $user->update($data);
 
-        return response(new UserResource($user));
+        return response(new UserResource($user->fresh()), 200);
     }
 
     /**

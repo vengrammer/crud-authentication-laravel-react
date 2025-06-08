@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axiosClient from "./axiosClient"
 import {Link} from "react-router-dom"
-import axios from "axios";
+
 
 
 function Users(){
