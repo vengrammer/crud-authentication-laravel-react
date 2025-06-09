@@ -6,7 +6,7 @@ import axiosClient from "../Views/axiosClient";
 
 
 function DefaultLayout(){
-    const {user, token, setUser, getToken} = useStateContext();
+    const {user, token, notification, setUser, getToken,} = useStateContext();
 
     useEffect(() => {
             axiosClient.get('/user')
@@ -52,6 +52,15 @@ function DefaultLayout(){
                     
                 </nav>
             </aside>
+             {notification && (
+                    <div className="fixed bottom-5 right-5 z-50 max-w-sm w-full">
+                        <div className="bg-green-700 border border-gray-200 shadow-lg rounded-2xl p-4">
+                            <div className="text-white text-sm font-medium">
+                                {notification}
+                            </div>
+                        </div>
+                    </div>
+                )}
             <div className="flex-1 flex flex-col">
     
                 <header className="bg-white shadow px-6 py-4 flex justify-between items-center border-b">
@@ -73,7 +82,9 @@ function DefaultLayout(){
                 <main className="flex-1 px-6 py-6 overflow-y-auto">
                     <Outlet />
                 </main>
-            </div>
+
+               
+            </div>  
         </div>
 
         </>

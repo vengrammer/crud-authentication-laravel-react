@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import axiosClient from "./axiosClient"
 import {Link} from "react-router-dom"
-
+import UserForm from "./UserForm";
 
 
 function Users(){
@@ -38,6 +38,10 @@ function Users(){
 
     return(
         <>
+            <div className="flex justify-between pb-7">
+                <h1 className="text-2xl font-semibold">Users</h1>
+                <Link to='/users/new' className="bg-green-600 pl-5 pr-5 pt-1 text-white rounded">Add new</Link>
+            </div>
             <table className="min-w-full divide-y divide-gray-200 shadow-md rounded-lg overflow-hidden">
                 <thead className="bg-gray-300 text-gray-700">
                     <tr>
